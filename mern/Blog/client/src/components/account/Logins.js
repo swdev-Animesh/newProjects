@@ -1,36 +1,58 @@
-import React from "react";
-// import { Box, TextField, Button, styled } from "@mui/material";
+import React, { useState } from "react";
+import { Box, TextField, Button, styled } from "@mui/material";
 
-// const LoginComponent = styled(Box)`
-//   width: 400px;
-//   box-shadow: 50px 46px 27px -36px rgba(133, 133, 133, 0.45);
-//   border: 1px solid #858585;
-//   margin: 10vh auto 0 auto;
-// `;
+const LoginComponent = styled(Box)`
+  width: 400px;
+  box-shadow: 26px 29px 22px -6px rgba(178, 161, 161, 0.53);
+  margin: 5vh auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  align-items: space-between;
+  & > div,
+  & > button {
+    margin-top: 3vh;
+  }
+  padding: 1vw;
+`;
 
-// const Image = styled("img")({
-//   width: "30px",
-//   height: "90px",
-// });
+const Image = styled("img")({
+  display: "block",
+  width: "100%",
+  height: "35vh",
+  boxShadow: "26px 29px 22px -6px rgba(178, 161, 161, 0.53)",
+});
 
 const Login = (props) => {
-  // const img =
-  //   "https://images.freeimages.com/variants/2B3oqERNAaMavsuRKQtTn4jH/f4a36f6589a0e50e702740b15352bc00e4bfaf6f58bd4db850e167794d05993d";
+  const [account, setAccount] = useState(false);
+  function createAccount() {
+    setAccount(!account);
+  }
+  // function setAccountFalse() {
+  //   setAccount(false);
+  // }
+  const img =
+    "https://images.freeimages.com/variants/2B3oqERNAaMavsuRKQtTn4jH/f4a36f6589a0e50e702740b15352bc00e4bfaf6f58bd4db850e167794d05993d";
 
   return (
-    
-    // <Box>
-    //   {/* <Image src={img} alt="Login logo"></Image> */}
+    <LoginComponent>
+      <Image src={img} alt="Login logo"></Image>
+      <TextField variant="standard" label="User Name"></TextField>
+      {account && <TextField variant="standard" label="Email"></TextField>}
+      <TextField
+        variant="standard"
+        label="Password"
+        type="password"
+      ></TextField>
 
-    //   <LoginComponent>
-    //     <TextField m={10} variant="outlined" label="User Name"></TextField>
-    //     <TextField variant="outlined" label="Password"></TextField>
-    //     <Button variant="contained">Sign In</Button>
-    //     <p className="text-center text-secondary">OR</p>
-    //     <Button variant="contained">Create new Account</Button>
-    //     <Button variant="contained">Create new Account</Button>
-    //   </LoginComponent>
-    // </Box>
+      {!account && <Button variant="contained">Sign In</Button>}
+      {account && <Button variant="contained">Sign Up</Button>}
+      <span>OR</span>
+      <Button variant="contained" onClick={createAccount}>
+        {account ? "Already have account" : "Sign Up"}
+      </Button>
+    </LoginComponent>
   );
 };
 export default Login;
