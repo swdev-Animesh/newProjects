@@ -24,6 +24,12 @@ const Image = styled("img")({
   boxShadow: "26px 29px 22px -6px rgba(178, 161, 161, 0.53)",
 });
 
+const initialStateInput = {
+  username: "",
+  email: "",
+  password: "",
+};
+
 const Login = (props) => {
   const [account, setAccount] = useState(false);
   function createAccount() {
@@ -35,15 +41,34 @@ const Login = (props) => {
   const img =
     "https://images.freeimages.com/variants/2B3oqERNAaMavsuRKQtTn4jH/f4a36f6589a0e50e702740b15352bc00e4bfaf6f58bd4db850e167794d05993d";
 
+  const [value, setValue] = useState(initialStateInput);
+
+  const valueSetter = (e) => {
+    setValue({ ...value, [e.target.name]: e.target.value });
+  };
   return (
     <LoginComponent>
       <Image src={img} alt="Login logo"></Image>
-      <TextField variant="standard" label="User Name"></TextField>
-      {account && <TextField variant="standard" label="Email"></TextField>}
+      <TextField
+        variant="standard"
+        label="User Name"
+        name="username"
+        onChange={valueSetter}
+      ></TextField>
+      {account && (
+        <TextField
+          variant="standard"
+          label="Email"
+          name="email"
+          onChange={valueSetter}
+        ></TextField>
+      )}
       <TextField
         variant="standard"
         label="Password"
         type="password"
+        name="password"
+        onChange={valueSetter}
       ></TextField>
 
       {!account && <Button variant="contained">Sign In</Button>}
