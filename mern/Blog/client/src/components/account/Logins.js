@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, TextField, Button, styled } from "@mui/material";
-
+import API from "../../service/api";
 const LoginComponent = styled(Box)`
   width: 400px;
   box-shadow: 26px 29px 22px -6px rgba(178, 161, 161, 0.53);
@@ -31,7 +31,12 @@ const initialStateInput = {
 };
 
 const Login = (props) => {
+  const [signup, setSignup] = useState(initialStateInput);
+  const signupUser = async () => {
+    await API.userSignup(signup);
+  };
   const [account, setAccount] = useState(false);
+
   function createAccount() {
     setAccount(!account);
   }
@@ -71,8 +76,10 @@ const Login = (props) => {
         onChange={valueSetter}
       ></TextField>
 
-      {!account && <Button variant="contained">Sign In</Button>}
-      {account && <Button variant="contained">Sign Up</Button>}
+      {/* {!account && <Button variant="contained">Sign In</Button>} */}
+      <Button variant="contained" onClick={signupUser}>
+        {account ? "Sign In" : "sign Up"}
+      </Button>
       <span>OR</span>
       <Button variant="contained" onClick={createAccount}>
         {account ? "Already have account" : "Sign Up"}
