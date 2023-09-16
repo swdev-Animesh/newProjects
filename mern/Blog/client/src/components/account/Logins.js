@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, TextField, Button, styled } from "@mui/material";
-import API from "../../service/api";
+import { API } from "../../service/api";
 const LoginComponent = styled(Box)`
   width: 400px;
   box-shadow: 26px 29px 22px -6px rgba(178, 161, 161, 0.53);
@@ -78,11 +78,12 @@ const Login = (props) => {
 
       {/* {!account && <Button variant="contained">Sign In</Button>} */}
       <Button variant="contained" onClick={signupUser}>
-        {account ? "Sign In" : "sign Up"}
+        {account ? "Sign Up" : "sign In"}
       </Button>
+      <hr></hr>
       <span>OR</span>
       <Button variant="contained" onClick={createAccount}>
-        {account ? "Already have account" : "Sign Up"}
+        {account ? "Sign Up" : "Already have account"}
       </Button>
     </LoginComponent>
   );

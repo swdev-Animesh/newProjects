@@ -28,7 +28,9 @@ axiosInstance.interceptors.response.use(
   },
   function (error) {
     // Stop global loader here
-    return Promise.reject(processReject(error));
+    return Promise.reject(processReject(error)).catch((error) =>
+      console.log(error)
+    );
   }
 );
 
@@ -51,7 +53,7 @@ const processResponse = (response) => {
   }
 };
 
-const processReject = (error) => {
+const processReject = async (error) => {
   if (error.response) {
     //request made server responded but not status code is not 2.x.x its something else like 500 or so
     console.log(error.toJSON());
@@ -62,7 +64,7 @@ const processReject = (error) => {
     };
   } else if (error.request) {
     //request made but no response .. mistake from server side
-    console.log(error.toJson());
+    // console.log(`line 65 apijs ${error} `);
     return {
       isError: true,
       msg: API_Notification.requestFailure,
@@ -70,7 +72,7 @@ const processReject = (error) => {
     };
   } else {
     //something mistake from our e end ..no request was nmade.mistake in setting request
-    console.log(error.toJson());
+    console.log(error.toJSON());
     return {
       isError: true,
       msg: API_Notification.networkError,

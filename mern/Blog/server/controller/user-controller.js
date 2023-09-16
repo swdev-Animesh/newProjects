@@ -7,6 +7,8 @@ const signupUser = async (request, response) => {
     await newUser.save();
     return response.status(200).json({ msg: "Signup done" });
   } catch (error) {
-    return response.status(400).json({ msg: "there is some error" });
+    if (response.status == "failed") {
+      return response.status(failed).json({ msg: "there is some error" });
+    } else return response.status(500).json({ msg: "there is some error" });
   }
 };
