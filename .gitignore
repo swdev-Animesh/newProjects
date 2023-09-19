@@ -1,3 +1,6 @@
+#remove files from other brances
+/mern
+*.md
 # Logs
 logs
 *.log
