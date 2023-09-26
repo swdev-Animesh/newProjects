@@ -45,3 +45,7 @@
 //piping
 // readStream.pipe(writeStream);
 // this will take streams from location and write it to location
+
+//package.json file
+//installing lodash
+//npm init
